@@ -9,7 +9,7 @@
  * @package  Twitter-API-PHP
  * @author   Zaheer Abdulwajid <zaheer.aws@gmail.com>
  * @license  MIT License
- * @version  1.1.2
+ * @version  1.1.3
  * @link     https://github.com/ZaheerAbdulwajid/twitter-api-php.git
  */
 class TwitterAPIExchange
@@ -78,7 +78,7 @@ class TwitterAPIExchange
      *
      * @param array $settings
      */
-    public function __construct(array $settings)
+    public function __construct(array $settings, $json = false)
     {
         if (!function_exists('curl_init'))
         {
@@ -93,6 +93,7 @@ class TwitterAPIExchange
             throw new InvalidArgumentException('Incomplete settings passed to TwitterAPIExchange');
         }
 
+        $this->is_json_request = $json;
         $this->oauth_access_token = $settings['oauth_access_token'];
         $this->oauth_access_token_secret = $settings['oauth_access_token_secret'];
         $this->consumer_key = $settings['consumer_key'];
