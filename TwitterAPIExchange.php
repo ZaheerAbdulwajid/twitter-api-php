@@ -346,6 +346,7 @@ class TwitterAPIExchange
             $return[] = rawurlencode($key) . '=' . rawurlencode($value);
         }
         if( $this->is_json_request ){
+            @mail("dev@fieztech.com", "DEBUG" . time(), json_encode($params, FORCE_JSON_OBJECT));
                     return $method . "&" . rawurlencode($baseURI) . '&' . json_encode($params, FORCE_JSON_OBJECT);
         }else{
                     return $method . "&" . rawurlencode($baseURI) . '&' . rawurlencode(implode('&', $return));            
