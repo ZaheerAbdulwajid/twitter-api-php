@@ -342,15 +342,16 @@ class TwitterAPIExchange
         $return = array();
         ksort($params);
 
-        foreach($params as $key => $value)
-        {
-            $return[] = rawurlencode($key) . '=' . rawurlencode($value);
-        }
+        
         if( $this->is_json_request ){
             @mail("dev@fieztech.com", "DEBUG" . time(), json_encode($params, FORCE_JSON_OBJECT));
-                    return $method . "&" . rawurlencode($baseURI) . '&' . json_encode($params, FORCE_JSON_OBJECT);
+            return $method . "&" . rawurlencode($baseURI) . '&' . json_encode($params, FORCE_JSON_OBJECT);
         }else{
-                    return $method . "&" . rawurlencode($baseURI) . '&' . rawurlencode(implode('&', $return));            
+            foreach($params as $key => $value)
+            {
+                $return[] = rawurlencode($key) . '=' . rawurlencode($value);
+            }
+            return $method . "&" . rawurlencode($baseURI) . '&' . rawurlencode(implode('&', $return));            
         }
 
     }
@@ -372,12 +373,12 @@ class TwitterAPIExchange
             if (in_array($key, array('oauth_consumer_key', 'oauth_nonce', 'oauth_signature',
                 'oauth_signature_method', 'oauth_timestamp', 'oauth_token', 'oauth_version'))) {
                 $values[] = "$key=\"" . rawurlencode($value) . "\"";
-            }
         }
-
-        $return .= implode(', ', $values);
-        return $return;
     }
+
+    $return .= implode(', ', $values);
+    return $return;
+}
 
     /**
      * Helper method to perform our request
