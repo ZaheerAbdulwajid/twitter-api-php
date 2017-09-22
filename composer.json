@@ -5,7 +5,7 @@
     "require-dev": {
         "phpunit/phpunit": "~4.5,>=4.5.1"
     },
-    "name": "ZaheerAbdulwajid/twitter-api-php",
+    "name": "zaheer-aws/twitter-api-php",
     "description": "Simple PHP Wrapper for Twitter API v1.1 calls",
     "type": "library",
     "keywords": [
@@ -18,7 +18,7 @@
     "authors": [
         {
             "name": "Zaheer Abdulwajid",
-            "homepage": "https://github.com/ZaheerAbdulwajid/twitter-api-php"
+            "homepage": "https://github.com/zaheeraws/twitter-api-php"
         }
     ],
     "autoload": {
