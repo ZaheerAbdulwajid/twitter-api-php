@@ -7,10 +7,10 @@
  *
  * @category Awesomeness
  * @package  Twitter-API-PHP
- * @author   James Mallison <me@j7mbo.co.uk>
+ * @author   Zaheer Abdulwajid <zaheer.aws@gmail.com>
  * @license  MIT License
- * @version  1.0.4
- * @link     http://github.com/j7mbo/twitter-api-php
+ * @version  1.1.2
+ * @link     https://github.com/ZaheerAbdulwajid/twitter-api-php.git
  */
 class TwitterAPIExchange
 {
@@ -53,6 +53,7 @@ class TwitterAPIExchange
      * @var string
      */
     public $url;
+    public $is_json_request;
 
     /**
      * @var string
@@ -344,8 +345,12 @@ class TwitterAPIExchange
         {
             $return[] = rawurlencode($key) . '=' . rawurlencode($value);
         }
+        if( $this->is_json_request ){
+                    return $method . "&" . rawurlencode($baseURI) . '&' . json_encode($params, FORCE_JSON_OBJECT);
+        }else{
+                    return $method . "&" . rawurlencode($baseURI) . '&' . rawurlencode(implode('&', $return));            
+        }
 
-        return $method . "&" . rawurlencode($baseURI) . '&' . rawurlencode(implode('&', $return));
     }
 
     /**
@@ -406,5 +411,9 @@ class TwitterAPIExchange
     public function getHttpStatusCode()
     {
         return $this->httpStatusCode;
+    }
+
+    public function postJson(){
+        $this->is_json_request = true;
     }
 }
